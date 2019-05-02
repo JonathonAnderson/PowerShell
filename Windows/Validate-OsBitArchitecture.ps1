@@ -20,7 +20,6 @@ function Validate-OsBitArchitecture
         [Parameter(Mandatory = $true)]
         [ValidateSet('32','64')]
         [string]$Is
-
     )
 
     BEGIN 
@@ -29,7 +28,6 @@ function Validate-OsBitArchitecture
         
         # Legacy Support
         #$OSBitArchitecture = $(Get-WmiObject -Class Win32_OperatingSystem -Property OSArchitecture).OSArchitecture
-
     }
 
     PROCESS 
@@ -39,8 +37,7 @@ function Validate-OsBitArchitecture
             "([^\d])*(32)([^\d])*" { return $($Is -eq '32') }
             "([^\d])*(64)([^\d])*" { return $($Is -eq '64') }
         }
-
     }
-
+    
     END {}
 }
