@@ -24,10 +24,16 @@ function Validate-OsBitArchitecture
 
     BEGIN 
     {
-        $OSBitArchitecture = $(Get-CimInstance -ClassName Win32_OperatingSystem -Property OSArchitecture).OSArchitecture
-        
-        # Legacy Support
-        #$OSBitArchitecture = $(Get-WmiObject -Class Win32_OperatingSystem -Property OSArchitecture).OSArchitecture
+        $ErrorActionPreference = "Stop"
+        try
+        {
+            $OSBitArchitecture = $(Get-CimInstance -ClassName Win32_OperatingSystem -Property OSArchitecture).OSArchitecture
+        }
+        catch
+        {
+            $OSBitArchitecture = $(Get-WmiObject -Class Win32_OperatingSystem -Property OSArchitecture).OSArchitecture
+        }
+        $ErrorActionPreference = "Continue"
     }
 
     PROCESS 
