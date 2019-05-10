@@ -146,3 +146,6 @@ detach vdisk
 #	##*===============================================
 #    Dismount-DiskImage -ImagePath $DiskImage.ImagePath
 
+############
+# Finally, add this to the catch block, as well.
+# Dismount-DiskImage -ImagePath $DiskImage.ImagePath
