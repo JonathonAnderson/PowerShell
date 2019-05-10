@@ -61,14 +61,14 @@ function Package-AppIntoVhd
 
         $CreateVhdScript =
 @"
-create vdisk file=$VhdFile maximum=$VhdBytes type=fixed
-select vdisk file=$VhdFile
+create vdisk file=`"$VhdFile`" maximum=$VhdBytes type=fixed
+select vdisk file=`"$VhdFile`"
 attach vdisk
 detail vdisk
 convert mbr
 create partition primary
 format fs=ntfs label="PSADT" quick
-assign mount=$VhdMnt
+assign mount=`"$VhdMnt`"
 "@
         New-Item -ItemType Directory -Path $WorkingDir -Force
         New-Item -ItemType Directory -Path $VhdMnt -Force
@@ -86,7 +86,7 @@ assign mount=$VhdMnt
         # Everything is migrated, dismount and cleanup
         $DismountVhdScript = 
 @"
-select vdisk file=$VhdFile
+select vdisk file=`"$VhdFile`"
 detach vdisk
 "@
         New-Item -ItemType File -Path $WorkingDir -Name $DismountVhdScriptName -Value $DismountVhdScript -Force
