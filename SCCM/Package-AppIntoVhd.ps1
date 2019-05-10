@@ -10,6 +10,7 @@
     .EXAMPLE
         Package-AppIntoVhd -PsadtRoot "\\sccm-server.in.your.domain\Sources\Applications\ApplicationToPackage"
     .TODO
+        -- Update PSADT Script from this script
         -- Beta Test
 #>
 
@@ -108,3 +109,40 @@ detach vdisk
         
     }
 }
+
+# Following can be added to beginning and end of PSADT script to simplify working with VHD
+##################
+## Beginning
+##################
+#	#endregion
+#	##* Do not modify section above
+#
+#    ##*===============================================
+#	##* VHD MANAGEMENT
+#	##*===============================================
+#    $VhdFile = "$scriptDirectory\vhd\payload.vhd"
+#
+#    $DiskImage = Mount-DiskImage -ImagePath "$VhdFile" -StorageType VHD -Access ReadOnly
+#    $VhdVol = $DiskImage | Get-Disk | Get-Partition | Get-Volume
+#
+#    $Vhd = $VhdVol.DriveLetter
+#
+#    $vhdDirFiles = ($Vhd + ":\Files")
+#    $vhdDirSupportFiles = ($Vhd +":\SupportFiles")
+#
+#	##*===============================================
+#	##* END VARIABLE DECLARATION
+#	##*===============================================
+############
+## End
+############
+#
+#	##*===============================================
+#	##* END SCRIPT BODY
+#	##*===============================================
+#	
+#    ##*===============================================
+#	##* VHD MANAGEMENT
+#	##*===============================================
+#    Dismount-DiskImage -ImagePath $DiskImage.ImagePath
+
