@@ -1,4 +1,4 @@
-﻿<#
+<#
     .AUTHOR
         Jonathon Anderson
     .COPYRIGHT 
@@ -40,7 +40,7 @@ function Manage-ADComputers
         {
             if($Computer.Name -in $ExpiredComputers.Name)
             {
-                Remove-ADComputer -Identity $Computer -Confirm:$false
+                Remove-ADObject -Identity $Computer -Recursive -Confirm:$false
             }
         }
     }
@@ -48,3 +48,5 @@ function Manage-ADComputers
     END {}
 }
 
+
+Manage-ADComputers -StaleTimeSpan (New-TimeSpan -Days 60) -ExpiredTimeSpan (New-TimeSpan -Days 90) -StaleOU  (Get-ADOrganizationalUnit -Filter { Name -like "Stale" })
